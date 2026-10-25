@@ -19,19 +19,17 @@ public:
     /**
      * @brief Start the PWM output
      *
-     * @param channel PWM channel (e.g., 0 for pwm0)
-     * @param low_time Low time of the signal of one period
-     * @param high_time High time of the signal of one period
-     * @param chip PWM chip number
-     * @return int >0 if success, otherwise failed
+     * @param channel PWM channel (1 or 2)
+     * @param frequency PWM frequency
      */
-    int start(int channel, float fequency);
+    void start(int channel, float fequency);
 
     /**
      * @brief Set duty cycle in nanoseconds
      */
     inline int setDutyCycleNS(int ns)
     {
+	if (pwmpath.empty()) return -1;
 	per = ns;
         return writeSYS(pwmpath + "/duty_cycle", ns);
     }
@@ -41,6 +39,7 @@ public:
      */
     inline int setDutyCycle(float percent)
     {
+	if (pwmpath.empty()) return -1;
 	int ns = (int)round((float)per * percent / 100.0);
         return writeSYS(pwmpath + "/duty_cycle", ns);
     }
@@ -50,6 +49,7 @@ public:
      */
     inline int setPeriodNS(int ns)
     {
+	if (pwmpath.empty()) return -1;
 	per = ns;
         return writeSYS(pwmpath + "/period", ns);
     }
@@ -59,6 +59,7 @@ public:
      */
     inline int stop() const
     {
+	if (pwmpath.empty()) return -1;
         return writeSYS(pwmpath + "/enable", 0);
     }
 

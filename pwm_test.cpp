@@ -13,15 +13,22 @@ int main(int argc, char *argv[]) {
     }
     printf("Enabling PWM on channel %d.\n",channel);
     PWM pwm;
-    pwm.start(channel, frequency);
-    printf("Duty cycle at 50%%\n");
+    try {
+	pwm.start(channel, frequency);
+    } catch (std::invalid_argument const& ex) {
+	std::cout << ex.what() << std::endl;
+	return -1;
+    }
+    printf("Duty cycle at 50%%. Press <enter>.\n");
     pwm.setDutyCycle(50);
     getchar();
-    printf("Duty cycle at 25%%\n");
+    printf("Duty cycle at 25%%. Press <enter>\n");
     pwm.setDutyCycle(25);
     getchar();
-    printf("Duty cycle at 75%%\n");
+    printf("Duty cycle at 75%%. Press <enter>\n");
     pwm.setDutyCycle(75);
     getchar();
+    printf("Disabling PWM on channel %d.\n",channel);
     pwm.stop();
+    return 0;
 }

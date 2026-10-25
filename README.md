@@ -18,11 +18,12 @@ they look like these:
 ```
 console=display
 overlay_prefix=rockchip
-overlays=rk3588-pwm14-m0 rk3588-pwm8-m0
+overlays=rk3588-pwm13-m0 rk3588-pwm8-m
 
 ```
 
-This enables the PWM on the pins 33 and 34 on the 40 pin header.
+This enables the PWM on the pins 33 (channel 1) and 35 (channel 2)
+on the 40 pin header.
 
 Create the group `gpio`:
 
