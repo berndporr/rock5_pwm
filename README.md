@@ -1,11 +1,13 @@
-# Rock5 pwm
+# Rock5 PWM
+
+A C++ class to control PWM on the Rock5B+.
 
 ## Prerequsisites
 
 Download from
 https://www.armbian.com/rock-5b/
-the image "Armbian 25.8.2 Bookworm Minimal / IOT".
-the 
+the image "Armbian Minimal / IOT".
+
 Call `armbian-config`:
   - upgrade to Debian "trixie"
   - Make sure you have kernel 6.18.x-current-rockchip64
@@ -17,12 +19,13 @@ they look like these:
 
 ```
 console=display
-overlay_prefix=rockchip
 overlays=rk3588-pwm13-m0 rk3588-pwm8-m
 
 ```
 
-This enables the PWM on the pins 33 (channel 1) and 35 (channel 2)
+This enables PWM on
+ - pin 33 (channel 1) and,
+ - pin 35 (channel 2)
 on the 40 pin header.
 
 Create the group `gpio`:
@@ -35,8 +38,6 @@ and add yourself and other users to it who want to write to the PWM device.
 Copy the file [90-gpio.rules](90-gpio.rules) to `/etc/udev/rules.d/`. This will
 make sure that the PWM can accessed by any user who's in the gpio group.
 
-The library and example programs how to control the motors are in [wheeleddrive](wheeleddrive).
-
 ## Demo program
 
 ```
@@ -45,7 +46,7 @@ make
 ./pwm_test 
 ```
 
-This generates a PWM at 50% duty cycle, then after a keypress at 25% and then at 75%.
+This generates a PWM at 50% duty cycle, then after a keypress 25% and then 75%.
 
 ## Credits
 
