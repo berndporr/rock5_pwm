@@ -18,6 +18,7 @@ void PWM::start(int channel, float frequency)
 	{
 	    const int r = fprintf(fp, "0");
 	    fflush(fp);
+	    usleep(retry_delay_us);
 	    if (r > 0)
 		break;
 	    if (i > export_attempts)
@@ -25,16 +26,15 @@ void PWM::start(int channel, float frequency)
 		    throw std::runtime_error("Timeout exporting: "+
 					     p);
 		}
-	    usleep(retry_delay_us);
 	}
     fclose(fp);
     int r;
     for (int i = 0;; i++)
 	{
 	    r = enable();
+	    usleep(retry_delay_us);
 	    if (r > 0)
 		break;
-	    usleep(retry_delay_us);
 	    if (i > export_attempts)
 		{
 		    throw std::runtime_error("Timeout enabling: "+

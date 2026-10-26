@@ -78,7 +78,6 @@ private:
         FILE *const fp = fopen(filename.c_str(), "w");
         if (NULL == fp)
         {
-	    std::cerr << "Could not write to: " << filename << std::endl;
             return -1;
         }
         const int r = fprintf(fp, "%d", value);
