@@ -19,14 +19,15 @@ they look like these:
 
 ```
 console=display
-overlays=rk3588-pwm13-m0 rk3588-pwm8-m
-
+overlays=rk3588-pwm13-m0 rk3588-pwm8-m0
 ```
 
 This enables PWM on
  - pin 33 (channel 1) and,
  - pin 35 (channel 2)
 on the 40 pin header.
+
+![alt tag](pinout)
 
 Create the group `gpio`:
 
