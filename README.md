@@ -27,7 +27,7 @@ This enables PWM on
  - pin 35 (channel 2)
 on the 40 pin header.
 
-![alt tag](pinout)
+![alt tag](pinout.png)
 
 Create the group `gpio`:
 
