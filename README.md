@@ -19,14 +19,15 @@ they look like these:
 
 ```
 console=display
-overlays=rk3588-pwm13-m0 rk3588-pwm8-m
-
+overlays=rk3588-pwm13-m0 rk3588-pwm8-m0
 ```
 
 This enables PWM on
  - pin 33 (channel 1) and,
  - pin 35 (channel 2)
 on the 40 pin header.
+
+![alt tag](pinout.png)
 
 Create the group `gpio`:
 
@@ -36,9 +37,13 @@ groupadd gpio
 and add yourself and other users to it who want to write to the PWM device.
 
 Copy the file [90-gpio.rules](90-gpio.rules) to `/etc/udev/rules.d/`. This will
-make sure that the PWM can accessed by any user who's in the gpio group.
+make sure that the PWM can be accessed by any user who's in the gpio group.
 
 ## Demo program
+
+`pwm_test <channel>`
+
+where channel can be 1 or 2.
 
 ```
 cmake .
