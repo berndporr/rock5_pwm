@@ -18,9 +18,9 @@ void PWM::start(int channel, float frequency)
 	{
 	    const int r = fprintf(fp, "0");
 	    fflush(fp);
-	    usleep(retry_delay_us);
 	    if (r > 0)
 		break;
+	    usleep(retry_delay_us);
 	    if (i > export_attempts)
 		{
 		    throw std::runtime_error("Timeout exporting: "+
@@ -28,11 +28,13 @@ void PWM::start(int channel, float frequency)
 		}
 	}
     fclose(fp);
+    usleep(200000);
     int r;
     for (int i = 0;; i++)
 	{
-	    r = enable();
-	    usleep(retry_delay_us);
+	    r = setPeriodNS((int)(1E9/frequency));
+	    if (r > 0)
+		r = enable();
 	    if (r > 0)
 		break;
 	    if (i > export_attempts)
@@ -40,10 +42,5 @@ void PWM::start(int channel, float frequency)
 		    throw std::runtime_error("Timeout enabling: "+
 					     p);
 		}
-	}
-    r = setPeriodNS((int)(1E9/frequency));
-    if (r < 0)
-	{
-	    throw std::runtime_error("Could not set period for: "+pwmpath);
 	}
 }
