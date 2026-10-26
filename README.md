@@ -53,6 +53,13 @@ make
 
 This generates a PWM at 50% duty cycle, then after a keypress 25% and then 75%.
 
+## Example LED driver
+
+Here is an example how to drive a 12V LED light with the BD137
+power transistor.
+
+![alt tag](led_driver.png)
+
 ## Credits
 
 - Bernd Porr -  bernd.porr@glasgow.ac.uk
