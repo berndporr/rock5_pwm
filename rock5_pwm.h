@@ -30,7 +30,6 @@ public:
     inline int setDutyCycleNS(int ns)
     {
 	if (pwmpath.empty()) return -1;
-	per = ns;
         return writeSYS(pwmpath + "/duty_cycle", ns);
     }
 
@@ -41,8 +40,8 @@ public:
     {
 	if (pwmpath.empty()) return -1;
 	int ns = per - (int)round((float)per * percent / 100.0);
-	if (percent >= 100) ns = 0;
-	if (percent <= 0) ns = per;
+	if (ns > per) ns = per;
+	if (ns < 0) ns = 0;
         return writeSYS(pwmpath + "/duty_cycle", ns);
     }
 
