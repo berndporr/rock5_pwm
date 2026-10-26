@@ -40,7 +40,9 @@ public:
     inline int setDutyCycle(float percent)
     {
 	if (pwmpath.empty()) return -1;
-	int ns = (int)round((float)per * percent / 100.0);
+	int ns = per - (int)round((float)per * percent / 100.0);
+	if (percent >= 100) ns = 0;
+	if (percent <= 0) ns = per;
         return writeSYS(pwmpath + "/duty_cycle", ns);
     }
 
@@ -57,7 +59,7 @@ public:
     /**
      * @brief Disable PWM output
      */
-    inline int stop() const
+    inline int stop()
     {
 	if (pwmpath.empty()) return -1;
         return writeSYS(pwmpath + "/enable", 0);
